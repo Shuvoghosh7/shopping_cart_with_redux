@@ -1,29 +1,39 @@
 import React from 'react';
 import AddProduct from './AddProduct';
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 const Products = () => {
+    const products = useSelector((state) => state.products
+    )
+    const dispatch = useDispatch();
+   
     return (
         <main class="py-16">
             <div class="productWrapper">
-              {/* show product in ui */}
+                {/* show product in ui */}
                 <div class="productContainer" id="lws-productContainer">
-                    
-                    <div class="lws-productCard">
-                        <img class="lws-productImage" src="https://i.dummyjson.com/data/products/59/thumbnail.jpg" alt="product" />
-                        <div class="p-4 space-y-2">
-                            <h4 class="lws-productName">Spring and summershoes</h4>
-                            <p class="lws-productCategory">Mens shoes</p>
-                            <div class="flex items-center justify-between pb-2">
-                                <p class="productPrice">BDT <span class="lws-price">400</span></p>
-                                <p class="productQuantity">QTY <span class="lws-quantity">10</span></p>
+                    {
+                        products?.map(product =>
+                            <div class="lws-productCard">
+                                <img class="lws-productImage" src={product.imageUrl} alt="product" />
+                                <div class="p-4 space-y-2">
+                                    <h4 class="lws-productName">{product.Pname}</h4>
+                                    <p class="lws-productCategory">{product.category}</p>
+                                    <div class="flex items-center justify-between pb-2">
+                                        <p class="productPrice">BDT <span class="lws-price">400</span></p>
+                                        <p class="productQuantity">Qun <span class="lws-quantity">{product.quantity}</span></p>
+                                    </div>
+                                    <button  class="lws-btnAddToCart" onClick={()=>dispatch()}>Add To Cart</button>
+                                </div>
                             </div>
-                            <button class="lws-btnAddToCart">Add To Cart</button>
-                        </div>
-                    </div>
+                        )
+                    }
+
+
                 </div>
-             {/* Add New Product From */}
+                {/* Add New Product From */}
                 <div>
-                    <AddProduct/>
+                    <AddProduct />
                 </div>
             </div>
         </main>
