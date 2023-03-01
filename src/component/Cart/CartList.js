@@ -1,16 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { quantityDecrement, quantityIncrement } from '../../redux/productCart/actionCreator';
+import { deleted, quantityDecrement, quantityIncrement } from '../../redux/productCart/actionCreator';
 
 const CartList = ({ product }) => {
-    const productCart = useSelector((state) => state.cart
-    )
     const dispatch=useDispatch()
     const { Pname, category, imageUrl, price, quantity, _id } = product
     
-    const handleClick = () => {
-        quantityIncrement(dispatch(_id, quantity + 1))
-      }
     return (
         <div>
             <div class="cartCard">
@@ -40,7 +35,7 @@ const CartList = ({ product }) => {
                 </div>
                 {/* <!-- delete button --> */}
                 <div class="flex items-center justify-center col-span-2 mt-4 md:justify-end md:mt-0">
-                    <button class="lws-removeFromCart">
+                    <button class="lws-removeFromCart" onClick={()=>dispatch(deleted(_id))}>
                         <i class="text-lg text-red-400 fa-solid fa-trash"></i>
                     </button>
                 </div>

@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_TO_CART, QUANTITYDECREMENT, QUANTITYINCREMENT } from "./actionType";
+import { ADD_PRODUCT, ADD_TO_CART, DELETE, QUANTITYDECREMENT, QUANTITYINCREMENT } from "./actionType";
 import initialState from "./initialState";
 
 
@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
         case ADD_TO_CART:
             return {
                 ...state,
-                /* products: state.products.map(product => {
+               /*  products: state.products.map(product => {
                     console.log(product)
                     if (product._id === action.payload.productId) {
                         return {
@@ -52,7 +52,11 @@ const reducer = (state = initialState, action) => {
                     return item
                 })
             }
-        
+        case DELETE:
+            return{
+                ...state,
+                cart: state.cart.filter((item)=>item._id !== action.payload)
+            }
         default:
             return state;
     }
