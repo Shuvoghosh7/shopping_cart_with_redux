@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { quantityIncrement } from '../../redux/productCart/actionCreator';
+import { quantityDecrement, quantityIncrement } from '../../redux/productCart/actionCreator';
 
 const CartList = ({ product }) => {
     const productCart = useSelector((state) => state.cart
@@ -31,7 +31,7 @@ const CartList = ({ product }) => {
                             <i class="text-lg fa-solid fa-plus"></i>
                         </button>
                         <span class="lws-cartQuantity">{quantity}</span>
-                        <button class="lws-decrementQuantity">
+                        <button class="lws-decrementQuantity" onClick={()=>dispatch(quantityDecrement(_id,quantity))}>
                             <i class="text-lg fa-solid fa-minus"></i>
                         </button>
                     </div>

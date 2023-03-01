@@ -30,9 +30,12 @@ export const quantityIncrement=( itemId,quantity)=>{
     }
 }
 
-export const quantityDecrement=(value)=>{
+export const quantityDecrement=(ditemId,dquantity)=>{
     return{
         type: QUANTITYDECREMENT,
-        payload:value
+        payload: {
+            ditemId,
+            dquantity
+          },
     }
 }
