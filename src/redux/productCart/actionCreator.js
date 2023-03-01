@@ -20,9 +20,13 @@ export const removeProduct=(productId)=>{
     }
 }
 
-export const quantityIncrement=()=>{
+export const quantityIncrement=( itemId,quantity)=>{
     return{
         type: QUANTITYINCREMENT,
+        payload: {
+            itemId,
+            quantity
+          },
     }
 }
 

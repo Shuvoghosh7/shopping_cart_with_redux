@@ -1,12 +1,8 @@
-import { ADD_PRODUCT, ADD_TO_CART, QUANTITYDECREMENT } from "./actionType";
+import { ADD_PRODUCT, ADD_TO_CART, QUANTITYINCREMENT } from "./actionType";
 import initialState from "./initialState";
 
 
 const reducer = (state = initialState, action) => {
-    const selectedProduct = state.cart.find(
-        (product) => product
-    );
-  
     switch (action.type) {
         case ADD_PRODUCT:
             return {
@@ -18,13 +14,21 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 cart: [...state.cart, action.payload],
             }
-        case QUANTITYDECREMENT: {
-            
+        case QUANTITYINCREMENT:
+            const {  itemId,quantity } = action.payload;
             return {
                 ...state,
-                cart: [...state, state.cart.quantity + 1],
+                cart: state.cart.map(item => {
+                    if (item._id === itemId) {
+                        return {
+                            ...item,
+                            quantity:+quantity + 1
+                        }
+                    }
+                    return item
+                })
             }
-        }
+
         default:
             return state;
     }

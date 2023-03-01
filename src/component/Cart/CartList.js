@@ -8,6 +8,9 @@ const CartList = ({ product }) => {
     const dispatch=useDispatch()
     const { Pname, category, imageUrl, price, quantity, _id } = product
     
+    const handleClick = () => {
+        quantityIncrement(dispatch(_id, quantity + 1))
+      }
     return (
         <div>
             <div class="cartCard">
@@ -24,7 +27,7 @@ const CartList = ({ product }) => {
                 <div class="flex items-center justify-center col-span-4 mt-4 space-x-8 md:mt-0">
                     {/* <!-- amount buttons --> */}
                     <div class="flex items-center space-x-4">
-                        <button class="lws-incrementQuantity" onClick={()=>dispatch(quantityIncrement())}>
+                        <button class="lws-incrementQuantity" onClick={()=>dispatch(quantityIncrement(_id,quantity))}>
                             <i class="text-lg fa-solid fa-plus"></i>
                         </button>
                         <span class="lws-cartQuantity">{quantity}</span>
