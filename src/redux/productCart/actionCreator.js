@@ -1,4 +1,4 @@
-import { ADD_PRODUCT, ADD_TO_CART, REMOVE_PRODUCT } from "./actionType"
+import { ADD_PRODUCT, ADD_TO_CART, QUANTITYDECREMENT, QUANTITYINCREMENT, REMOVE_PRODUCT } from "./actionType"
 
 
 export const addProduct=(value)=>{
@@ -17,5 +17,18 @@ export const removeProduct=(productId)=>{
     return{
         type:REMOVE_PRODUCT,
         payload:productId
+    }
+}
+
+export const quantityIncrement=()=>{
+    return{
+        type: QUANTITYINCREMENT,
+    }
+}
+
+export const quantityDecrement=(value)=>{
+    return{
+        type: QUANTITYDECREMENT,
+        payload:value
     }
 }

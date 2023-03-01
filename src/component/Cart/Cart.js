@@ -1,6 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import CartList from './CartList';
 
 const Cart = () => {
+    const productCart = useSelector((state) => state.cart
+    )
+    const subtotal = productCart.reduce((accumulator, item) => {
+        return accumulator + (item.price * item.quantity);
+    }, 0);
+    
     return (
         <main class="py-16">
             <div class="container 2xl:px-8 px-2 mx-auto">
@@ -8,38 +16,12 @@ const Cart = () => {
                 <div class="cartListContainer">
                     <div class="space-y-6">
                         {/* <!-- Cart Item --> */}
-                        <div class="cartCard">
-                            <div class="flex items-center col-span-6 space-x-6">
-                                {/* <!-- cart image --> */}
-                                <img class="lws-cartImage" src="https://i.dummyjson.com/data/products/40/thumbnail.jpg" alt="product" />
-                                {/* <!-- cart item info --> */}
-                                <div class="space-y-2">
-                                    <h4 class="lws-cartName">Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptop</h4>
-                                    <p class="lws-cartCategory">Men's clothing</p>
-                                    <p>BDT <span class="lws-cartPrice">1100</span></p>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-center col-span-4 mt-4 space-x-8 md:mt-0">
-                                {/* <!-- amount buttons --> */}
-                                <div class="flex items-center space-x-4">
-                                    <button class="lws-incrementQuantity">
-                                        <i class="text-lg fa-solid fa-plus"></i>
-                                    </button>
-                                    <span class="lws-cartQuantity">2</span>
-                                    <button class="lws-decrementQuantity">
-                                        <i class="text-lg fa-solid fa-minus"></i>
-                                    </button>
-                                </div>
-                                {/* <!-- price --> */}
-                                <p class="text-lg font-bold">BDT <span class="lws-calculatedPrice">2200</span></p>
-                            </div>
-                            {/* <!-- delete button --> */}
-                            <div class="flex items-center justify-center col-span-2 mt-4 md:justify-end md:mt-0">
-                                <button class="lws-removeFromCart">
-                                    <i class="text-lg text-red-400 fa-solid fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
+                        {
+                            productCart.map(product => <CartList
+                                product={product}
+                            />)
+                        }
+
                         {/* <!-- Cart Items Ends --> */}
 
                     </div>
@@ -52,7 +34,7 @@ const Cart = () => {
                                 {/* <!-- sub total --> */}
                                 <div class="flex items-center justify-between">
                                     <p>Sub Total</p>
-                                    <p>BDT <span class="lws-subtotal">8800</span></p>
+                                    <p>BDT <span class="lws-subtotal">{subtotal}</span></p>
                                 </div>
                                 {/* <!-- Discount --> */}
                                 <div class="flex items-center justify-between">
@@ -64,10 +46,10 @@ const Cart = () => {
                                     <p>VAT</p>
                                     <p>BDT <span class="vat">0</span></p>
                                 </div>
-                              
+
                                 <div class="flex items-center justify-between pb-4">
                                     <p class="font-bold">TOTAL</p>
-                                    <p class="font-bold">BDT <span class="lws-total">8800</span></p>
+                                    <p class="font-bold">BDT <span class="lws-total">{subtotal+10}</span></p>
                                 </div>
                                 <button class="placeOrderbtn">place order</button>
                             </div>
